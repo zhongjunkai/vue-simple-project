@@ -1,6 +1,6 @@
 import { onMounted, defineComponent } from "./lib/vue/vue.js";
 import { _get } from "./common/tools.js";
-import customModule from "./lib/custom/index.js";
+import CustomModeler from "./lib/modeler/index.js";
 
 export default defineComponent({
     template: `<div id="canvas"></div>`,
@@ -12,11 +12,8 @@ export default defineComponent({
          */
         const init = () => {
             canvas = document.getElementById("canvas");
-            bpmnModeler = new BpmnJS({
-                container: canvas,
-                additionalModules: [
-                    customModule
-                ]
+            bpmnModeler = new CustomModeler({
+                container: canvas
             });
             const url = "./lib/diagram.bpmn";
             const callback = async (xml) => {
