@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>工作流程设计器</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" type="text/css" href="./lib/bpmn/assets/diagram-js.css">
+    <link rel="stylesheet" type="text/css" href="./lib/bpmn/assets/bpmn-font/css/bpmn.css">
+    <link rel="stylesheet" type="text/css" href="./lib/bpmn/assets/bpmn-font/css/bpmn-codes.css">
+    <link rel="stylesheet" type="text/css" href="./lib/bpmn/assets/bpmn-font/css/bpmn-embedded.css">
+    <script type="text/javascript" src="./lib/bpmn/bpmn-modeler.development.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script type="module">
+    import { createApp } from "./lib/vue/vue.js";
+    import App from "./index.js";
+    
+    createApp(App).mount("#app");
+</script>
+</body>
+</html>

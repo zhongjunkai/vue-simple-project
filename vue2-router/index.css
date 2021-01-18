@@ -1,0 +1,7 @@
+html,body, #app {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+}
