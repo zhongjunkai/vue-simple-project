@@ -3,7 +3,9 @@ import router, { routes } from "./router.js";
 import { store } from "./store.js";
 
 /**
- * Vue、Vue-router、Vuex都是2.0系列版本
+ * vue是2.6.12版本
+ * vue-router是3.0.3版本
+ * vuex是3.1.0版本
  */
 new Vue({
     template: `
