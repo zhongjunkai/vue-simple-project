@@ -12,7 +12,7 @@ export default defineComponent({
          */
         const init = () => {
             canvas = document.getElementById("canvas");
-            bpmnModeler = new CustomModeler({
+            bpmnModeler = new BpmnJS({
                 container: canvas
             });
             const url = "./lib/diagram.bpmn";
