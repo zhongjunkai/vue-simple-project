@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    function chain(callback) {
+        let f1 = function f() {
+            let s2 = function s() {
+                return callback.apply(null, arguments);
+            }
+            debugger;
+            return s2;
+        }
+        return f1;
+    }
+    
+    function fn(arr) {
+        return arr.reduce(function (a, b) {
+            return a + b;
+        }, 0);
+    }
+    
+    let sum = chain(fn)([ 1, 2, 3 ])([ 4, 5 ]);
+    console.log(sum);
+    debugger;
+</script>
+</body>
+</html>

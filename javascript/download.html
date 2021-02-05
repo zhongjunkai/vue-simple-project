@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分片下载</title>
+</head>
+<body>
+<input type="file" id="file"/>
+<script type="text/javascript">
+    function initUpload() {
+        const chunk = 100 * 1024; // 每片大小
+        const input = document.getElementById("file"); // input
+        input.onchange = function (e) {
+            const file = this.files[0];
+            let query = {};
+            const chunks = [];
+            if (!!file) {
+                let start = 0;
+                for (let i = 0; i < Math.ceil(file.size / chunk); i++) {
+                    let end = start + chunk;
+                    chunks[i] = file.slice(start, end);
+                    start = end;
+                }
+                
+                query = {
+                    fileSize: file.size,
+                    dataSize: chunk,
+                    nextOffset: 0
+                };
+                
+                upload(chunks, query, successPerUpload);
+            }
+        }
+    }
+    
+    function upload(chunks, query, cb) {
+        const queryStr = Object.getOwnPropertyNames(query).map(key => {
+            return key + "=" + query[key];
+        }).join("&");
+        const xhr = new XMLHttpRequest();
+        xhr.open("open", "http://xxxx/upload?" + queryStr);
+        xhr.overrideMimeType("application/octet-stream");
+        
+        const index = Math.floor(query.nextOffset / query.dataSize);
+        getFileBinary(chunks[index], function (binary) {
+            if (xhr.sendAsBinary) {
+                xhr.sendAsBinary(binary);
+            } else {
+                xhr.send(binary);
+            }
+        });
+        
+        xhr.onreadystatechange = function (e) {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    let resp = JSON.parse(xhr.responseText);
+                    // resp = {
+                    //     isFinish: false,
+                    //     offset: 100 * 1024
+                    // };
+                    if (typeof cb === "function") {
+                        cb.call(this, resp, chunks, query);
+                    }
+                }
+            }
+        }
+    }
+    
+    // 每片上传成功后执行
+    function successPerUpload(resp, chunks, query) {
+        if (resp.isFinish === true) {
+            alert("上传成功");
+        } else {
+            // 未上传完毕继续上传
+            query.offset = resp.offset;
+            upload(chunks, query, successPerUpload)
+        }
+    }
+    
+    // 获取文件二进制数据
+    function getFileBinary(file, callback) {
+        let reader = new FileReader();
+        reader.readAsArrayBuffer(file);
+        reader.onload = function (e) {
+            if (typeof callback === "function") {
+                callback.call(this, this.result);
+            }
+        }
+    }
+    
+    initUpload();
+</script>
+</body>
+</html>

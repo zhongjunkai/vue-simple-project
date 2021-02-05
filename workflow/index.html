@@ -8,12 +8,12 @@
     <link rel="stylesheet" type="text/css" href="./lib/bpmn/assets/bpmn-font/css/bpmn.css">
     <link rel="stylesheet" type="text/css" href="./lib/bpmn/assets/bpmn-font/css/bpmn-codes.css">
     <link rel="stylesheet" type="text/css" href="./lib/bpmn/assets/bpmn-font/css/bpmn-embedded.css">
-    <script type="text/javascript" src="./lib/bpmn/bpmn-modeler.development.js"></script>
+    <script type="text/javascript" src="./lib/bpmn/bpmn-modeler.production.min.js"></script>
 </head>
 <body>
 <div id="app"></div>
 <script type="module">
-    import { createApp } from "./lib/vue/vue.js";
+    import { createApp } from "./lib/vue/vue.esm-browser.js";
     import App from "./index.js";
     
     createApp(App).mount("#app");

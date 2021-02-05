@@ -1,4 +1,4 @@
-import { onMounted, defineComponent } from "./lib/vue/vue.js";
+import { onMounted, defineComponent } from "./lib/vue/vue.esm-browser.js";
 import { _get } from "./common/tools.js";
 import CustomModeler from "./lib/modeler/index.js";
 

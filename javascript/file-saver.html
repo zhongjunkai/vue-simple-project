@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    const _global = typeof window === "object" && window.window === window ?
+            window : (typeof self === "object" && self.self === self ?
+                    self : (typeof global === "object" && global.global === global
+                            ? global : this));
+    const blob = "11111";
+    let b = new Blob([ blob ], { type: "string" });
+    
+    function saveAs() {}
+</script>
+</body>
+</html>
